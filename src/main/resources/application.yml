@@ -62,3 +62,9 @@ spring:
         event-out:
           destination: myProject_LSP
           contentType: application/json
+          
+logging:
+  level:
+    org.hibernate.type: trace
+    org.springframework.cloud: debug
+  file: /mnt/aws/logs/mypage-application.log
