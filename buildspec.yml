@@ -65,7 +65,7 @@ phases:
             labels:
               app: $_PROJECT_NAME
           spec:
-            replicas: 3
+            replicas: 1
             selector:
               matchLabels:
                 app: $_PROJECT_NAME
@@ -95,21 +95,21 @@ phases:
                       initialDelaySeconds: 20
                       periodSeconds: 30
           EOF
-      - |
-          cat <<EOF | kubectl apply -f -
-          apiVersion: autoscaling/v1
-          kind: HorizontalPodAutoscaler
-          metadata:
-            name: skcchpa
-            namespace: teamc
-          spec:
-            scaleTargetRef:
-              apiVersion: apps/v1
-              kind: Deployment
-              name: $_PROJECT_NAME
-            minReplicas: 3
-            maxReplicas: 5
-            targetCPUUtilizationPercentage: 10
+     # - |
+          #cat <<EOF | kubectl apply -f -
+          #apiVersion: autoscaling/v1
+          #kind: HorizontalPodAutoscaler
+          #metadata:
+          #  name: skcchpa
+          #  namespace: teamc
+          #spec:
+            #scaleTargetRef:
+            #  apiVersion: apps/v1
+            #  kind: Deployment
+            #  name: $_PROJECT_NAME
+            #minReplicas: 3
+            #maxReplicas: 5
+            #targetCPUUtilizationPercentage: 10
             #metrics:
             #- type: Resource
             #  resource:
@@ -117,7 +117,7 @@ phases:
             #    target:
             #      type: Utilization
             #      averageUtilization: 10
-          EOF
+      #    EOF
 cache:
   paths:
     - '/root/.m2/**/*'
